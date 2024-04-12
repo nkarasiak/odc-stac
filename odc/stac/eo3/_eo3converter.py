@@ -215,7 +215,6 @@ def _to_dataset(
         "$schema": "https://schemas.opendatacube.org/dataset",
         "crs": str(crs),
         "grids": grids,
-        "location": "",
         "measurements": measurements,
         "properties": dicttoolz.keymap(
             lambda k: STAC_TO_EO3_RENAMES.get(k, k), properties
@@ -223,7 +222,7 @@ def _to_dataset(
         "lineage": {},
     }
 
-    return Dataset(product, prep_eo3(ds_doc), uris=[ds_doc.get("location", "")])
+    return Dataset(product, prep_eo3(ds_doc), uris=[item.href if item.href else ""])
 
 
 def _item_to_ds(

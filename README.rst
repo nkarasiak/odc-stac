@@ -1,7 +1,7 @@
 odc.stac
 ########
 
-|Documentation Status| |Test Status| |Test Coverage| |Binder|
+|Documentation Status| |Test Status| |Test Coverage| |Binder| |Discord|
 
 Load STAC items into ``xarray`` Datasets. Process locally or distribute data
 loading and computation with Dask_.
@@ -123,6 +123,10 @@ Linting is provided by mypy_, pylint_, and black_:
 .. |Binder| image:: https://mybinder.org/badge_logo.svg
    :target: https://mybinder.org/v2/gh/opendatacube/odc-stac/develop?urlpath=lab/workspaces/demo
    :alt: Run Examples in Binder
+
+.. |Discord| image:: https://img.shields.io/discord/1212501566326571070?label=Discord&logo=discord&logoColor=white&color=7289DA
+   :target: https://discord.gg/4hhBQVas5U
+   :alt: Join Discord for support
 
 .. _Binder: https://mybinder.org/v2/gh/opendatacube/odc-stac/develop?urlpath=lab/workspaces/demo
 

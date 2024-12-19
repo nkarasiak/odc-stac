@@ -609,6 +609,7 @@ def chunked_load(
     env: Dict[str, Any],
     rdr: ReaderDriver,
     *,
+    dtype: Optional[DTypeLike] = None,
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
     pool: ThreadPoolExecutor | int | None = None,
     progress: Optional[Any] = None,
@@ -640,6 +641,7 @@ def chunked_load(
         env,
         rdr,
         chunks=chunks,
+        dtype=dtype,
     )
 
 
@@ -652,6 +654,7 @@ def dask_chunked_load(
     tss: Sequence[datetime],
     env: Dict[str, Any],
     rdr: ReaderDriver,
+    dtype: Optional[DTypeLike] = None,
     *,
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
 ) -> xr.Dataset:
@@ -661,10 +664,12 @@ def dask_chunked_load(
 
     gbox = gbt.base
     extra_dims = template.extra_dims_full()
+
     chunk_shape = resolve_chunk_shape(
-        len(tss),
-        gbox,
-        chunks,
+        nt=len(tss),
+        gbox=gbox,
+        chunks=chunks,
+        dtype=dtype,
         extra_dims=extra_dims,
     )
     chunks_normalized = dict(zip(["time", "y", "x", *extra_dims], chunk_shape))
@@ -913,7 +918,7 @@ def resolve_chunk_shape(
     """
     if dtype is None and cfg:
         dtype = _largest_dtype(cfg, "float32")
-
+    
     chunks = {**chunks}
     for s, d in zip(gbox.dimensions, ["y", "x"]):
         if s != d and s in chunks:

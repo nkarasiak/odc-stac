@@ -419,9 +419,9 @@ def raster_group_md(
     edims = base.extra_dims.copy()
     edims.update({str(name): sz for name, sz in src.sizes.items() if name not in sdims})
 
-    aliases: dict[str, list[BandKey]] = base.aliases.copy()
+    aliases = base.aliases.copy()
 
-    extra_coords: list[FixedCoord] = list(base.extra_coords)
+    extra_coords = list(base.extra_coords)
     supplied_coords = set(coord.name for coord in extra_coords)
 
     for coord in src.coords.values():

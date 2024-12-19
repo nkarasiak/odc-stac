@@ -918,7 +918,7 @@ def resolve_chunk_shape(
     """
     if dtype is None and cfg:
         dtype = _largest_dtype(cfg, "float32")
-    
+
     chunks = {**chunks}
     for s, d in zip(gbox.dimensions, ["y", "x"]):
         if s != d and s in chunks:

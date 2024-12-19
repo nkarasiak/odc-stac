@@ -609,11 +609,7 @@ def chunked_load(
     env: Dict[str, Any],
     rdr: ReaderDriver,
     *,
-<<<<<<< HEAD
-    dtype: DTypeLike | str | None = None,
-=======
     dtype: DTypeLike = None,
->>>>>>> fd05d09 (fix(mypy) : fixes #183)
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
     pool: ThreadPoolExecutor | int | None = None,
     progress: Optional[Any] = None,

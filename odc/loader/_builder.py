@@ -440,7 +440,7 @@ def _dask_loader_tyx(
 def _dask_fuser(
     srcs: list[list[Any]],
     shape: tuple[int, ...],
-    dtype: str | DTypeLike,
+    dtype: DTypeLike,
     fill_value: float | int,
     src_ydim: int = 0,
 ):
@@ -609,7 +609,7 @@ def chunked_load(
     env: Dict[str, Any],
     rdr: ReaderDriver,
     *,
-    dtype: Optional[DTypeLike] = None,
+    dtype: DTypeLike = None,
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
     pool: ThreadPoolExecutor | int | None = None,
     progress: Optional[Any] = None,
@@ -654,7 +654,7 @@ def dask_chunked_load(
     tss: Sequence[datetime],
     env: Dict[str, Any],
     rdr: ReaderDriver,
-    dtype: Optional[DTypeLike] = None,
+    dtype: DTypeLike = None,
     *,
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
 ) -> xr.Dataset:

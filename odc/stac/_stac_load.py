@@ -90,7 +90,7 @@ def load(
     *,
     groupby: Optional[Groupby] = "time",
     resampling: Optional[Union[str, Dict[str, str]]] = None,
-    dtype: Union[DTypeLike, Dict[str, DTypeLike], None] = None,
+    dtype: DTypeLike = None,
     chunks: Optional[Dict[str, int | Literal["auto"]]] = None,
     pool: Union[ThreadPoolExecutor, int, None] = None,
     # Geo selection

@@ -359,9 +359,9 @@ class BenchLoadParams:
                 # translate to list, stackstac doesn't like tuple
                 assets = list(self.bands)
 
-            extra.setdefault("dtype", "uint16")
             extra.setdefault("fill_value", 0)
             extra.setdefault("xy_coords", "center")
+            extra.setdefault("rescale", False)
 
             return _trim_dict(
                 {

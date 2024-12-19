@@ -440,7 +440,7 @@ def _dask_loader_tyx(
 def _dask_fuser(
     srcs: list[list[Any]],
     shape: tuple[int, ...],
-    dtype: str | DTypeLike,
+    dtype: DTypeLike,
     fill_value: float | int,
     src_ydim: int = 0,
 ):
@@ -609,7 +609,11 @@ def chunked_load(
     env: Dict[str, Any],
     rdr: ReaderDriver,
     *,
+<<<<<<< HEAD
     dtype: DTypeLike | str | None = None,
+=======
+    dtype: DTypeLike = None,
+>>>>>>> fd05d09 (fix(mypy) : fixes #183)
     chunks: Mapping[str, int | Literal["auto"]] | None = None,
     pool: ThreadPoolExecutor | int | None = None,
     progress: Optional[Any] = None,

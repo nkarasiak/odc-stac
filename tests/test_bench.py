@@ -20,8 +20,8 @@ from odc.stac.bench import (
 CFG = {
     "*": {
         "warnings": "ignore",
-        # for every asset in every product default to uint16 with nodata=0
-        "assets": {"*": {"data_type": "uint16", "nodata": 0}},
+        # for every asset in every product default to int64 with nodata=0
+        "assets": {"*": {"data_type": "int64", "nodata": 0}},
     }
 }
 
@@ -107,13 +107,13 @@ def test_load_from_json_stackstac(fake_dask_client, bench_site1, bench_site2):
         resampling="nearest",
         extra={
             "odc-stac": {"groupby": "solar_day", "stac_cfg": CFG},
-            "stackstac": {"dtype": "uint16", "fill_value": 0},
+            "stackstac": {"dtype": "int64", "fill_value": 0},
         },
     )
     xx = load_from_json(bench_site1, params)
     assert "band" in xx.dims
     assert xx.shape == (1, 3, 90978, 10980)
-    assert xx.dtype == "uint16"
+    assert xx.dtype == "int64"
     assert xx.spec.epsg == 32735
 
     yy = load_from_json(
@@ -127,13 +127,13 @@ def test_load_from_json_stackstac(fake_dask_client, bench_site1, bench_site2):
 
     xx = load_from_json(bench_site2, params)
     assert "band" in xx.dims
-    assert xx.dtype == "uint16"
+    assert xx.dtype == "int64"
     assert xx.spec.epsg == 32735
 
     params.crs = "epsg:32736"
     xx = load_from_json(bench_site2, params)
     assert "band" in xx.dims
-    assert xx.dtype == "uint16"
+    assert xx.dtype == "int64"
     assert xx.spec.epsg == 32736
 
     with pytest.raises(ValueError):
@@ -166,14 +166,14 @@ def test_bench_context(fake_dask_client, bench_site1, bench_site2):
 
     header_txt = rr.render_txt()
     assert "T.slice   : 2020-06-06" in header_txt
-    assert f"Data      : 1.3.{ny}.{nx}.uint16,  5.58 GiB" in header_txt
+    assert f"Data      : 1.3.{ny}.{nx}.int64,  22.33 GiB" in header_txt
 
     run_txt = rr.render_timing_info((0, 0.1, 30))
     assert isinstance(run_txt, str)
 
     pd_dict = rr.to_pandas_dict()
     assert pd_dict["resolution"] == rr.resolution
-    assert pd_dict["data"] == f"1.3.{ny}.{nx}.uint16"
+    assert pd_dict["data"] == f"1.3.{ny}.{nx}.int64"
     assert pd_dict["chunks_x"] == 2048
     assert pd_dict["chunks_y"] == 2048
 

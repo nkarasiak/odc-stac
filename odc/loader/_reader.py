@@ -34,6 +34,7 @@ def _dask_read_adaptor(
     env: dict[str, Any],
     selection: Optional[ReaderSubsetSelection] = None,
 ) -> tuple[tuple[slice, slice], np.ndarray]:
+
     with driver.restore_env(env, ctx) as local_ctx:
         rdr = driver.open(src, local_ctx)
         return rdr.read(cfg, dst_geobox, selection=selection)

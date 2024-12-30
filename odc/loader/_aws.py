@@ -5,7 +5,6 @@
 """
 Helper methods for working with AWS
 """
-
 import json
 import os
 import time
